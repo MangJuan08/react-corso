@@ -56,7 +56,7 @@ function App() {
   // const numeri = [1,2,3,4,5];
   // console.log(Math.max(...numeri))
   //props.children-> tutto il contenuto dall'apertura e chiusa del tag del componente
-  //key => serve per far rendere univoco l'oggetto
+  //key => serve per far rendere univoco un'item, l'utilizzo del key è per cambiare,aggiornare o eliminare un item ell'array
   return (
     <div className="container">
       <br></br>
