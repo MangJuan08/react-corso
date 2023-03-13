@@ -1,8 +1,6 @@
 import { Card } from "./Card";
 import products from "./Products";
 
-
-
 function App() {
   //spread operator -> passare i valori in modo semplice
   // const numeri = [1,2,3,4,5];
