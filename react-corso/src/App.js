@@ -1,3 +1,4 @@
+import { Card } from "./Card";
 import { Component1 } from "./Component1";
 
 const primaCard = {
@@ -7,7 +8,7 @@ const primaCard = {
 
 const secondoCard = {
   nome: "Secondo Card",
-  prezzo: 15,
+  prezzo: 19,
 };
 
 function App() {
@@ -20,28 +21,16 @@ function App() {
       <br></br>
       <div className="row">
         <div className="col-sm-2">
-          <CardComponent nome={primaCard.nome} prezzo={primaCard.prezzo} />
+          <Card nome={primaCard.nome} prezzo={primaCard.prezzo} />
         </div>
         <div className="col-sm-2">
-          <CardComponent nome={secondoCard.nome} prezzo={secondoCard.prezzo} />
+          <Card nome={secondoCard.nome} prezzo={secondoCard.prezzo} />
         </div>
       </div>
     </div>
   );
 }
 
-const CardComponent = (props) => {
- 
-  return (
-    <div className="card">
-      <div className="card-body">
-        <h5 className="card-title">{props.nome}</h5>
-        <p>
-        €{props.prezzo}
-        </p>
-      </div>
-    </div>
-  );
-};
+
 
 export default App;
