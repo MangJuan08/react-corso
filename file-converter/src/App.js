@@ -9,7 +9,22 @@ export default function App() {
   const [file, setFile] = useState(null);
   const [sheetData, setSheetData]= useState(null);
   const arr = [
-    ["prova","prova"]
+    {
+      "id": { /* (data omitted) */ },
+      "name": {
+        "first": "John",          // <-- first name
+        "last": "Adams"           // <-- last name
+      },
+      "bio": {
+        "birthday": "1735-10-19", // <-- birthday
+        "gender": "M"
+      },
+      "terms": [
+        { "type": "viceprez", /* (other fields omitted) */ },
+        { "type": "viceprez", /* (other fields omitted) */ },
+        { "type": "prez", /* (other fields omitted) */ }
+      ]
+    }
   ]
 
   useEffect(() => {
@@ -23,16 +38,23 @@ export default function App() {
   };
 
   const handleExport = () => {
-    let wb = XLSX.utils.book_new(),
-    ws = XLSX.utils.json_to_sheet(sheetData);
+    let cols = ['Data','Nome','Cognome','Seriale','Modello','Marca','Tipo','Firma'];
+    let ws = XLSX.utils.json_to_sheet(sheetData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, ws);
   
-    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-    XLSX.writeFile(wb, "MyExcel.xlsx");
+    /* fix headers */
+    XLSX.utils.sheet_add_aoa(ws, [cols], { origin: "A1" });
+  
+  
+    /* create an XLSX file and try to save to Presidents.xlsx */
+    XLSX.writeFile(workbook, "Presidents.xlsx", { compression: true });
+ 
   }
 
   return (
     <div className="App">
-      <h1>Hello To Drag & Drop Files</h1>
+      <h1>Drag Files</h1>
       <FileUploader
         multiple={true}
         handleChange={handleChange}
