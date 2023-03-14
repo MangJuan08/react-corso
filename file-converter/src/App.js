@@ -13,11 +13,11 @@ export default function App() {
     setFile(file);
     console.log(typeof file);
    
-    Object.keys(file).map((key) => (
- arr.pushfile[key].name.replace(/_/g, " ")
+    /*Object.keys(file).map((key) => (
+ arr.push(file[key].name.replace(/_/g, " ")
     )) 
 
-    console.log(arr)
+    console.log(arr)*/
   };
   return (
     <div className="App">
