@@ -1,0 +1,15 @@
+.App {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height:500px;
+  }
+  label {
+    width: 350px;
+   
+    box-sizing: border-box;
+  }
+  

@@ -1,5 +1,5 @@
 {
-  "name": "advanced-react-app",
+  "name": "file-converter",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,6 +10,7 @@
     "react-dom": "^18.2.0",
     "react-drag-drop-files": "^2.3.9",
     "react-scripts": "5.0.1",
+    "sheetjs-style": "^0.15.8",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
