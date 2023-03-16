@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CSVLink } from "react-csv";
 import * as XLSX from "sheetjs-style";
-import { DownloadTableExcel } from "react-export-table-to-excel";
-import * as FileSaver from "file-saver";
 import { nanoid } from "nanoid";
 
 
@@ -21,14 +18,19 @@ export const ExportTableExcel = () => {
   });
 
   const exportToCSV = () => {
-    const ws = XLSX.utils.json_to_sheet(datas);
+    if(datas.length>0){
+      const ws = XLSX.utils.json_to_sheet(datas);
 
-    /* add to workbook */
-    var wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "foglio");
-
-    /* generate an XLSX file */
-    XLSX.writeFile(wb, "sheetjs.xlsx");
+      /* add to workbook */
+      var wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "foglio");
+  
+      /* generate an XLSX file */
+      XLSX.writeFile(wb, "sheetjs.xlsx");
+    }
+    else {
+      alert("nessun dati da esportare")
+    }
   };
 
   const onValChange = (event) => {
@@ -91,8 +93,7 @@ export const ExportTableExcel = () => {
       <br></br>
       <br></br>
 
-      <br></br>
-      <br></br>
+     
       <button className="btn btn-danger" onClick={clearTable}>
         Clear table
       </button>
@@ -137,9 +138,13 @@ export const ExportTableExcel = () => {
       </table>
       <br></br>
       <br></br>
+      <h3>AGGIUNGI RECORD</h3>
+      <br></br>
+      <div className="row">
+        <div className="col-md-6">
       <form>
         <div className="row">
-          <div className="col">
+          <div className="col-md-4">
             <input
               type="text"
               name="data_"
@@ -149,7 +154,7 @@ export const ExportTableExcel = () => {
               placeholder="DATA"
             />
           </div>
-          <div className="col">
+          <div className="col-md-4">
             <input
               type="text"
               name="nome"
@@ -160,7 +165,7 @@ export const ExportTableExcel = () => {
             />
           </div>
           <br></br>
-          <div className="col">
+          <div className="col-md-4">
             <input
               type="text"
               name="cognome"
@@ -173,7 +178,7 @@ export const ExportTableExcel = () => {
         </div>
         <br></br>
         <div className="row">
-          <div className="col">
+          <div className="col-md-4">
             <input
               type="text"
               name="tipo"
@@ -184,7 +189,7 @@ export const ExportTableExcel = () => {
             />
           </div>
 
-          <div className="col">
+          <div className="col-md-4">
             <input
               type="text"
               name="disp"
@@ -194,7 +199,7 @@ export const ExportTableExcel = () => {
               placeholder="DISPOSITIVO"
             />
           </div>
-          <div className="col">
+          <div className="col-md-4">
             <input
               type="text"
               name="marca"
@@ -207,7 +212,7 @@ export const ExportTableExcel = () => {
         </div>
         <br></br>
         <div className="row">
-          <div className="col">
+          <div className="col-md-6">
             <input
               type="text"
               name="modello"
@@ -217,7 +222,7 @@ export const ExportTableExcel = () => {
               placeholder="MODELLO"
             />
           </div>
-          <div className="col">
+          <div className="col-md-6">
             <input
               type="text"
               name="seriale"
@@ -230,7 +235,7 @@ export const ExportTableExcel = () => {
         </div>
         <br></br>
         <div className="row">
-          <div className="col">
+          <div className="col-md-12">
             <input
               type="text"
               name="firma"
@@ -244,7 +249,7 @@ export const ExportTableExcel = () => {
 
         <br></br>
         <div className="row">
-          <div className="col ">
+          <div className="col-md-4 ">
             <button
               onClick={(e) => addRow(e)}
               className="btn btn-primary form-control"
@@ -254,6 +259,13 @@ export const ExportTableExcel = () => {
           </div>
         </div>
       </form>
+      </div>
+    </div>
+        <div className="row">
+          <div className="col-md-6">
+
+          </div>
+        </div>
     </div>
   );
 };
