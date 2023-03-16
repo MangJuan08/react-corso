@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import * as XLSX from "sheetjs-style";
 import { nanoid } from "nanoid";
 import { toast, Toaster } from "react-hot-toast";
+import FormRecordFill from "../components/FormRecordFill";
+import { Table } from "../components/Table";
 
 export const ExportTableExcel = () => {
   const [datas, setData] = useState([]);
@@ -90,6 +92,22 @@ export const ExportTableExcel = () => {
     else alert("TABELLA VUOTA");
   };
 
+  const clearForm = () => {
+    const isEmpty = {
+      id: "",
+      data_: "",
+      nome: "",
+      cognome: "",
+      tipo: "",
+      disp: "",
+      marca: "",
+      modello: "",
+      seriale: "",
+      firma: "",
+    };
+    setStateForm(isEmpty)
+  }
+
   return (
     <div className="container">
       <br></br>
@@ -123,7 +141,34 @@ export const ExportTableExcel = () => {
         <div className="card-body">
           <div className="row">
             <div className="col-md-12">
-              <form>
+              <FormRecordFill
+                datas={datas}
+                formData={formData}
+                onValChange={onValChange}
+                deleteRow={deleteRow}
+                addRow={addRow}
+                clearForm={clearForm}
+              ></FormRecordFill>
+              <br></br>{" "}
+              <p>
+                {datas.length > 0
+                  ? "Numero Totale:" + datas.length
+                  : "Numero Totale:" + 0}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br></br> <br></br>
+      <Table datas={datas} deleteRow={deleteRow}></Table>
+    </div>
+  );
+};
+/*
+
+
+add record
+<form>
                 <div className="row">
                   <div className="col-md-4">
                     <input
@@ -240,52 +285,44 @@ export const ExportTableExcel = () => {
                   </div>
                 </div>
               </form>
-              <br></br>{" "}
-              <p>
-                {datas.length > 0
-                  ? "Numero Totale:" + datas.length
-                  : "Numero Totale:" + 0}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <br></br> <br></br>
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Data</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Cognome</th>
-            <th scope="col">Tipo</th>
-            <th scope="col">Dispositivo</th>
-            <th scope="col">Marca</th>
-            <th scope="col">modello</th>
-            <th scope="col">Seriale</th>
-            <th scope="col">Firma</th>
+              
+              
+              
+              table
+              
+              
+              <table className="table">
+    <thead>
+      <tr>
+        <th scope="col">Data</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Cognome</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Dispositivo</th>
+        <th scope="col">Marca</th>
+        <th scope="col">modello</th>
+        <th scope="col">Seriale</th>
+        <th scope="col">Firma</th>
+      </tr>
+    </thead>
+    <tbody>
+      {datas.map((item) => {
+        return (
+          <tr key={item.id}>
+            <td>{item.data_}</td>
+            <td>{item.nome}</td>
+            <td>{item.cognome}</td>
+            <td>{item.tipo}</td>
+            <td>{item.disp}</td>
+            <td>{item.marca}</td>
+            <td>{item.modello}</td>
+            <td>{item.seriale}</td>
+            <td>{item.firma}</td>
+            <td>
+              <button onClick={() => deleteRow(item.id)}>delete</button>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {datas.map((item) => {
-            return (
-              <tr key={item.id}>
-                <td>{item.data_}</td>
-                <td>{item.nome}</td>
-                <td>{item.cognome}</td>
-                <td>{item.tipo}</td>
-                <td>{item.disp}</td>
-                <td>{item.marca}</td>
-                <td>{item.modello}</td>
-                <td>{item.seriale}</td>
-                <td>{item.firma}</td>
-                <td>
-                  <button onClick={() => deleteRow(item.id)}>delete</button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
-};
+        );
+      })}
+    </tbody>
+  </table>*/
