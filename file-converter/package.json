@@ -6,13 +6,18 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "file-saver": "^2.0.5",
+    "nanoid": "^4.0.1",
     "react": "^18.2.0",
+    "react-csv": "^2.2.2",
     "react-dom": "^18.2.0",
     "react-drag-drop-files": "^2.3.9",
+    "react-export-table-to-excel": "^1.0.6",
     "react-scripts": "5.0.1",
     "sheetjs-style": "^0.15.8",
     "web-vitals": "^2.1.4",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "xlsx-populate": "^1.21.0"
   },
   "scripts": {
     "start": "react-scripts start",
