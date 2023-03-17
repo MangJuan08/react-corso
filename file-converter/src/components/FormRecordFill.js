@@ -6,7 +6,8 @@ const FormRecordFill = ({
   onValChange,
   deleteRow,
   addRow,
-  clearForm,
+  clearForm
+
 }) => {
   const tipo_operazione = ["Restituzione", "Assegnazione"];
   const dispositivo = ["PC", "CELL"];
@@ -160,6 +161,7 @@ const FormRecordFill = ({
               CLEAR FORM
             </button>
           </div>
+        
         </div>
       </form>
 
@@ -176,4 +178,10 @@ export default FormRecordFill;
               onChange={onValChange}
               className="form-control form-control-sm"
               placeholder="TIPO"
-            />*/
+            />
+            
+            
+
+ 
+            
+            */

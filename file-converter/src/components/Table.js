@@ -19,9 +19,10 @@ export const Table = ({ datas, deleteRow }) => {
           </tr>
         </thead>
         <tbody>
-          {datas.map((item) => {
+          {datas.map((item, index) => {
+          
             return (
-              <tr key={item.id}>
+              <tr key={index}>
                 <td>{item.data_}</td>
                 <td>{item.nome}</td>
                 <td>{item.cognome}</td>
@@ -32,7 +33,10 @@ export const Table = ({ datas, deleteRow }) => {
                 <td>{item.seriale}</td>
                 <td>{item.firma}</td>
                 <td>
-                  <button className="btn btn-danger" onClick={() => deleteRow(item.id)}>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => deleteRow(item.id)}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -57,3 +61,11 @@ export const Table = ({ datas, deleteRow }) => {
     </div>
   );
 };
+
+/*
+      <th scope="col">index</th>
+          <th scope="col">id</th>
+ <td>{index}</td>
+                <td>{item.id}</td>
+
+                */
