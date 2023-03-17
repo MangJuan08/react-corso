@@ -6,8 +6,23 @@ const FormRecordFill = ({
   onValChange,
   deleteRow,
   addRow,
-  clearForm
+  clearForm,
 }) => {
+  const tipo_operazione = ["Restituzione", "Assegnazione"];
+  const dispositivo = ["PC", "CELL"];
+  const marca = [
+    "SAMSUNG",
+    "IPHONE",
+    "MOTOROLA",
+    "HUAWEI",
+    "ACER",
+    "DELL",
+    "LENOVO",
+    "TOSHIBA",
+    "FUJITSU",
+    "HP"
+  ];
+  const firma = ["SI", "NO"];
   return (
     <div>
       <form>
@@ -47,35 +62,44 @@ const FormRecordFill = ({
         <br></br>
         <div className="row">
           <div className="col-md-4">
-            <input
-              type="text"
+            <select
+              onChange={onValChange}
               name="tipo"
               value={formData.tipo}
-              onChange={onValChange}
               className="form-control form-control-sm"
-              placeholder="TIPO"
-            />
+            >
+              <option>-TIPO-</option>
+              {tipo_operazione.map((option, index) => {
+                return <option key={index}>{option}</option>;
+              })}
+            </select>
           </div>
 
           <div className="col-md-4">
-            <input
-              type="text"
+            <select
+              onChange={onValChange}
               name="disp"
               value={formData.disp}
-              onChange={onValChange}
               className="form-control form-control-sm"
-              placeholder="DISPOSITIVO"
-            />
+            >
+              <option>-DISPOSITIVO-</option>
+              {dispositivo.map((dispositivo, index) => {
+                return <option key={index}>{dispositivo}</option>;
+              })}
+            </select>
           </div>
           <div className="col-md-4">
-            <input
-              type="text"
+            <select
+              onChange={onValChange}
               name="marca"
               value={formData.marca}
-              onChange={onValChange}
               className="form-control form-control-sm"
-              placeholder="MARCA"
-            />
+            >
+              <option>-MARCA-</option>
+              {marca.map((marca, index) => {
+                return <option key={index}>{marca}</option>;
+              })}
+            </select>
           </div>
         </div>
         <br></br>
@@ -104,14 +128,17 @@ const FormRecordFill = ({
         <br></br>
         <div className="row">
           <div className="col-md-12">
-            <input
-              type="text"
+            <select
+              onChange={onValChange}
               name="firma"
               value={formData.firma}
-              onChange={onValChange}
               className="form-control form-control-sm"
-              placeholder="FIRMA"
-            />
+            >
+              <option>-FIRMA-</option>
+              {firma.map((firma, index) => {
+                return <option key={index}>{firma}</option>;
+              })}
+            </select>
           </div>
         </div>
 
@@ -142,3 +169,11 @@ const FormRecordFill = ({
 };
 
 export default FormRecordFill;
+/*   <input
+              type="text"
+              name="tipo"
+              value={formData.tipo}
+              onChange={onValChange}
+              className="form-control form-control-sm"
+              placeholder="TIPO"
+            />*/

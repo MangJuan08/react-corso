@@ -4,6 +4,12 @@ import { nanoid } from "nanoid";
 import { toast, Toaster } from "react-hot-toast";
 import FormRecordFill from "../components/FormRecordFill";
 import { Table } from "../components/Table";
+import BootstrapTable from "react-bootstrap-table-next";
+import paginationFactory from "react-bootstrap-table2-paginator";
+import filterFactory, {textFilter} from "react-bootstrap-table2-filter";
+/*import "react-bootstrap-table-next/dist/react-bootstrap-table2-paginator.min.css";
+import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
+import "react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css";*/
 
 export const ExportTableExcel = () => {
   const [datas, setData] = useState([]);
@@ -19,6 +25,54 @@ export const ExportTableExcel = () => {
     firma: "",
   });
 
+  const columns = [
+    {
+      dataField: "id",
+      text: "ID",
+    },
+    {
+      dataField: "data_",
+      text: "Data",
+    },
+    {
+      dataField: "nome",
+      text: "Nome",
+      sort:true,
+      filter:textFilter()
+    },
+    {
+      dataField: "cognome",
+      text: "Cognome",
+      sort:true,
+      filter:textFilter()
+    },
+    {
+      dataField:"tipo",
+      text:"Tipo"
+    },
+    {
+      dataField: "disp",
+      text: "Dispositivo",
+    },
+    {
+      dataField:"marca",
+      text:"Marca"
+    },
+    {
+      dataField: "modello",
+      text: "Modello",
+    },
+    {
+      dataField:"seriale",
+      text:"Seriale"
+    },
+    {
+      dataField:"firma",
+      text:"Firma"
+    },
+    
+  ];
+
   const exportToCSV = () => {
     if (datas.length > 0) {
       const ws = XLSX.utils.json_to_sheet(datas);
@@ -28,7 +82,7 @@ export const ExportTableExcel = () => {
       XLSX.utils.book_append_sheet(wb, ws, "foglio");
 
       /* generate an XLSX file */
-      XLSX.writeFile(wb, "sheetjs.xlsx");
+      XLSX.writeFile(wb, "Assegnazione_Restituzione.xlsx");
       toast.success("TABLE EXPORTED SUCCESSFULLY");
     } else {
       alert("nessun dati da esportare");
@@ -108,6 +162,27 @@ export const ExportTableExcel = () => {
     setStateForm(isEmpty);
   };
 
+  const readExcel = (f) => {
+    const p = new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsArrayBuffer(f);
+      fileReader.onload = (e) => {
+        const buffArray = e.target.result;
+        const wb = XLSX.read(buffArray, { type: "buffer" });
+        const wsname = wb.SheetNames[0];
+        const ws = wb.Sheets[wsname];
+        const data = XLSX.utils.sheet_to_json(ws);
+        resolve(data);
+      };
+      fileReader.onerror = (err) => {
+        reject(err);
+      };
+    });
+    p.then((d) => {
+      setData(...datas, d);
+    });
+  };
+
   return (
     <div className="container">
       <br></br>
@@ -120,7 +195,11 @@ export const ExportTableExcel = () => {
       >
         CLEAR TABLE
       </button>
-      <button className="btn btn-primary" onClick={exportToCSV}>
+      <button
+        className="btn btn-primary"
+        onClick={exportToCSV}
+        style={{ marginRight: 20 }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -136,6 +215,13 @@ export const ExportTableExcel = () => {
         </svg>{" "}
         EXPORT TABLE
       </button>
+      <input
+        type="file"
+        onChange={(e) => {
+          const file = e.target.files[0];
+          readExcel(file);
+        }}
+      />
       <br></br> <br></br>
       <div className="card">
         <div className="card-body">
@@ -159,170 +245,27 @@ export const ExportTableExcel = () => {
           </div>
         </div>
       </div>
-      <br></br> <br></br>
-      <Table datas={datas} deleteRow={deleteRow}></Table>
+      <br></br> 
+    
+      <br></br>
+      <BootstrapTable
+        bootstrap4
+        keyField="id"
+        data={datas}
+        columns={columns}
+        filter={filterFactory()}
+        pagination={paginationFactory({
+          page: 1,
+          sizePerPage: 5,
+          showTotal: true,
+          alwaysShowAllBtns: true,
+        })}
+      ></BootstrapTable>
     </div>
   );
 };
 /*
+  <Table datas={datas} deleteRow={deleteRow}></Table>
 
 
-add record
-<form>
-                <div className="row">
-                  <div className="col-md-4">
-                    <input
-                      type="text"
-                      name="data_"
-                      value={formData.data_}
-                      onChange={onValChange}
-                      className="form-control form-control-sm"
-                      placeholder="DATA"
-                    />
-                  </div>
-                  <div className="col-md-4">
-                    <input
-                      type="text"
-                      name="nome"
-                      value={formData.nome}
-                      onChange={onValChange}
-                      className="form-control form-control-sm"
-                      placeholder="NOME"
-                    />
-                  </div>
-                  <br></br>
-                  <div className="col-md-4">
-                    <input
-                      type="text"
-                      name="cognome"
-                      value={formData.cognome}
-                      onChange={onValChange}
-                      className="form-control form-control-sm"
-                      placeholder="COGNOME"
-                    />
-                  </div>
-                </div>
-                <br></br>
-                <div className="row">
-                  <div className="col-md-4">
-                    <input
-                      type="text"
-                      name="tipo"
-                      value={formData.tipo}
-                      onChange={onValChange}
-                      className="form-control form-control-sm"
-                      placeholder="TIPO"
-                    />
-                  </div>
-
-                  <div className="col-md-4">
-                    <input
-                      type="text"
-                      name="disp"
-                      value={formData.disp}
-                      onChange={onValChange}
-                      className="form-control form-control-sm"
-                      placeholder="DISPOSITIVO"
-                    />
-                  </div>
-                  <div className="col-md-4">
-                    <input
-                      type="text"
-                      name="marca"
-                      value={formData.marca}
-                      onChange={onValChange}
-                      className="form-control form-control-sm"
-                      placeholder="MARCA"
-                    />
-                  </div>
-                </div>
-                <br></br>
-                <div className="row">
-                  <div className="col-md-6">
-                    <input
-                      type="text"
-                      name="modello"
-                      value={formData.modello}
-                      onChange={onValChange}
-                      className="form-control form-control-sm"
-                      placeholder="MODELLO"
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <input
-                      type="text"
-                      name="seriale"
-                      value={formData.seriale}
-                      onChange={onValChange}
-                      className="form-control form-control-sm"
-                      placeholder="SERIALE"
-                    />
-                  </div>
-                </div>
-                <br></br>
-                <div className="row">
-                  <div className="col-md-12">
-                    <input
-                      type="text"
-                      name="firma"
-                      value={formData.firma}
-                      onChange={onValChange}
-                      className="form-control form-control-sm"
-                      placeholder="FIRMA"
-                    />
-                  </div>
-                </div>
-
-                <br></br>
-                <div className="row">
-                  <div className="col-md-4 ">
-                    <button
-                      onClick={(e) => addRow(e)}
-                      className="btn btn-primary form-control"
-                    >
-                      AGGIUNGI RECORD
-                    </button>
-                  </div>
-                </div>
-              </form>
-              
-              
-              
-              table
-              
-              
-              <table className="table">
-    <thead>
-      <tr>
-        <th scope="col">Data</th>
-        <th scope="col">Nome</th>
-        <th scope="col">Cognome</th>
-        <th scope="col">Tipo</th>
-        <th scope="col">Dispositivo</th>
-        <th scope="col">Marca</th>
-        <th scope="col">modello</th>
-        <th scope="col">Seriale</th>
-        <th scope="col">Firma</th>
-      </tr>
-    </thead>
-    <tbody>
-      {datas.map((item) => {
-        return (
-          <tr key={item.id}>
-            <td>{item.data_}</td>
-            <td>{item.nome}</td>
-            <td>{item.cognome}</td>
-            <td>{item.tipo}</td>
-            <td>{item.disp}</td>
-            <td>{item.marca}</td>
-            <td>{item.modello}</td>
-            <td>{item.seriale}</td>
-            <td>{item.firma}</td>
-            <td>
-              <button onClick={() => deleteRow(item.id)}>delete</button>
-            </td>
-          </tr>
-        );
-      })}
-    </tbody>
-  </table>*/
+*/
