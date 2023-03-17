@@ -135,6 +135,8 @@ const FormRecordFill = ({
           </div>
         </div>
       </form>
+
+      <br></br>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import * as XLSX from "sheetjs-style";
+import * as XLSX from "xlsx";
 import { nanoid } from "nanoid";
 import { toast, Toaster } from "react-hot-toast";
 import FormRecordFill from "../components/FormRecordFill";
@@ -105,8 +105,8 @@ export const ExportTableExcel = () => {
       seriale: "",
       firma: "",
     };
-    setStateForm(isEmpty)
-  }
+    setStateForm(isEmpty);
+  };
 
   return (
     <div className="container">
