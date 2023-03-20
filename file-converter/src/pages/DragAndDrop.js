@@ -1,25 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import * as XLSX from "xlsx/xlsx";
+
 
 const fileTypes = ["PDF"];
 
 export default function DragAndDrop() {
-  const [file, setFile] = useState(null);
-  const [sheetData, setSheetData] = useState(null);
   const [tableData, setTableData] = useState([]);
 
   const handleChange = (file) => {
-    setFile(file);
-    let newData = {
-      data: "",
-      nome: "",
-      cognome: "",
-      tipo: "",
-      disp: "",
-      marca: "",
-    };
-
     let arr = Object.keys(file).map((key) => {
       return file[key].name.replace(/_/g, " ");
     });
@@ -37,7 +26,7 @@ export default function DragAndDrop() {
         marca: item[5],
       };
     });
-    console.log(cd);
+
     setTableData(cd);
     /*setTableData((tableData) => [...tableData,cd])
 
@@ -120,14 +109,19 @@ export default function DragAndDrop() {
     setTableData([]);
   };
 
-  const editRow = (id) => {
-    console.log(id)
-  }
+  const deleteRow = (id,e) => {
+    /*console.log(tableData.map((el,ind) => ind))
+  setTableData(tableData.filter((item,i) => i!==index))*/
+    console.log(id);
+    /* setTableData(tableData.filter((i) => i !== id));*/
+
+    setTableData(tableData.filter((item, i) => i !== id));
+  };
 
   return (
     <div className="container App">
       <br></br>
-      <br></br>
+
       <h1>Drag Files</h1>
       <div className="row">
         <div className="col-md-12">
@@ -140,40 +134,48 @@ export default function DragAndDrop() {
         </div>
       </div>
 
-      <br></br>
+   
       <br></br>
       <div className="row">
         <div className="col-md-12">
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">Data</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Cognome</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Dispositivo</th>
-                <th scope="col">Marca</th>
-                <th scope="col">modello</th>
-                <th scope="col">Seriale</th>
-                <th scope="col">Firma</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.map((item, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{item.data}</td>
-                    <td>{item.nome}</td>
-                    <td>{item.cognome}</td>
-                    <td>{item.tipo}</td>
-                    <td>{item.disp}</td>
-                    <td>{item.marca}</td>
-                    <td><button className="btn btn-danger" onClick={()=>editRow(index)}>edit</button></td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+    
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">Data</th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Cognome</th>
+                  <th scope="col">Tipo</th>
+                  <th scope="col">Dispositivo</th>
+                  <th scope="col">Marca</th>
+                  <th scope="col">Operazione</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tableData.map((item, index) => 
+                   (
+                    <tr key={index}>
+                      <td>{item.data}</td>
+                      <td>{item.nome}</td>
+                      <td>{item.cognome}</td>
+                      <td>{item.tipo}</td>
+                      <td>{item.disp}</td>
+                      <td>{item.marca}</td>
+
+                      <td>
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={(e)=>deleteRow(index,e)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  )
+                )}
+              </tbody>
+            </table>
+       
         </div>
       </div>
       <div className="row">
@@ -199,10 +201,3 @@ export default function DragAndDrop() {
     </div>
   );
 }
-
-/*  <ul>
-        {file ? Object.keys(file).map((key) => (
-          <li key={key}>{file[key].name.replace(/_/g, " ")}</li>
-        )) 
-      : ""}
-      </ul>*/

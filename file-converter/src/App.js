@@ -4,7 +4,8 @@ import { ExportTableExcel } from "./pages/ExportTableExcel";
 import Assegnazione from "./pages/Assegnazione";
 import { Restituzione } from "./pages/Restituzione";
 import HomePage from "./pages/HomePage";
-import DragAndDrop from "./DragAndDrop";
+import DragAndDrop from "./pages/DragAndDrop";
+
 
 export const App = () => {
   return (
