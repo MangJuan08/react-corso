@@ -2,7 +2,6 @@ import { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import * as XLSX from "xlsx/xlsx";
 
-
 const fileTypes = ["PDF"];
 
 export default function DragAndDrop() {
@@ -109,12 +108,8 @@ export default function DragAndDrop() {
     setTableData([]);
   };
 
-  const deleteRow = (id,e) => {
-    /*console.log(tableData.map((el,ind) => ind))
-  setTableData(tableData.filter((item,i) => i!==index))*/
+  const deleteRow = (id, e) => {
     console.log(id);
-    /* setTableData(tableData.filter((i) => i !== id));*/
-
     setTableData(tableData.filter((item, i) => i !== id));
   };
 
@@ -134,48 +129,43 @@ export default function DragAndDrop() {
         </div>
       </div>
 
-   
       <br></br>
       <div className="row">
         <div className="col-md-12">
-    
-            <table className="table">
-              <thead>
-                <tr>
-                  <th scope="col">Data</th>
-                  <th scope="col">Nome</th>
-                  <th scope="col">Cognome</th>
-                  <th scope="col">Tipo</th>
-                  <th scope="col">Dispositivo</th>
-                  <th scope="col">Marca</th>
-                  <th scope="col">Operazione</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tableData.map((item, index) => 
-                   (
-                    <tr key={index}>
-                      <td>{item.data}</td>
-                      <td>{item.nome}</td>
-                      <td>{item.cognome}</td>
-                      <td>{item.tipo}</td>
-                      <td>{item.disp}</td>
-                      <td>{item.marca}</td>
+          <table className="table table-striped">
+            <thead className="thead-dark">
+              <tr>
+                <th scope="col">Data</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Cognome</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Dispositivo</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Operazione</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tableData.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.data}</td>
+                  <td>{item.nome}</td>
+                  <td>{item.cognome}</td>
+                  <td>{item.tipo}</td>
+                  <td>{item.disp}</td>
+                  <td>{item.marca}</td>
 
-                      <td>
-                        <button
-                          className="btn btn-danger btn-sm"
-                          onClick={(e)=>deleteRow(index,e)}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  )
-                )}
-              </tbody>
-            </table>
-       
+                  <td>
+                    <button
+                      className="btn btn-danger btn-sm"
+                      onClick={(e) => deleteRow(index, e)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
       <div className="row">

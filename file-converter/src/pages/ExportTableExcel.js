@@ -128,7 +128,7 @@ export const ExportTableExcel = () => {
       seriale: formData.seriale,
       firma: formData.firma,
     };
-
+    console.log(e.target.value)
     setData((datas) => [...datas, newDatas]);
     console.log(datas);
     toast.success("RECORD ADDED SUCCESSFULLY");
