@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import * as XLSX from "xlsx/xlsx";
+import { Linkcollapse } from "../components/Linkcollapse";
 
 const fileTypes = ["PDF"];
 
 export default function DragAndDrop() {
   const [tableData, setTableData] = useState([]);
+  const [value, setValue] = useState("1");
 
   const handleChange = (file) => {
     let arr = Object.keys(file).map((key) => {
@@ -27,21 +29,6 @@ export default function DragAndDrop() {
     });
 
     setTableData(cd);
-    /*setTableData((tableData) => [...tableData,cd])
-
-
-   0:(5) ['20200201', 'Annalisa', 'Madonia', 'Rest', 'Cell.pdf'],
-   1:(5) ['20200211', 'Giovanni', 'Maraboli', 'Asseg', 'Cell.pdf']
-   
-   e li voglio far diventare come questo 
-
-   let dataOb [
-    { data:'20200201',nome:'Annalisa', cognome:'Madonia',tipo:'Rest',disp:'Cell.pdf'},
-    { data:'20200211',nome:'Giovanni', cognome:'Maraboli',tipo:'Asseg',disp:'Cell.pdf'}
-   ]
-   
-   
-   */
 
     /*-------funziona per singolo file ------*/
 
@@ -116,8 +103,8 @@ export default function DragAndDrop() {
   return (
     <div className="container App">
       <br></br>
-
-      <h1>Drag Files</h1>
+      <br></br>
+ 
       <div className="row">
         <div className="col-md-12">
           <FileUploader
@@ -188,6 +175,7 @@ export default function DragAndDrop() {
           </button>
         </div>
       </div>
+      <br></br>
     </div>
   );
 }
