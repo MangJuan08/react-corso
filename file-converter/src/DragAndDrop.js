@@ -78,7 +78,7 @@ export default function DragAndDrop() {
 
     /*-------funziona per singolo file ------*/
   };
-/* 
+  /* 
   const handleExport = () => {
     let cols = [
       "Data",
@@ -120,6 +120,10 @@ export default function DragAndDrop() {
     setTableData([]);
   };
 
+  const editRow = (id) => {
+    console.log(id)
+  }
+
   return (
     <div className="container App">
       <br></br>
@@ -137,55 +141,61 @@ export default function DragAndDrop() {
       </div>
 
       <br></br>
-
       <br></br>
-
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Data</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Cognome</th>
-            <th scope="col">Tipo</th>
-            <th scope="col">Dispositivo</th>
-            <th scope="col">Marca</th>
-            <th scope="col">modello</th>
-            <th scope="col">Seriale</th>
-            <th scope="col">Firma</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tableData.map((item, index) => {
-            return (
-              <tr key={index}>
-                <td>{item.data}</td>
-                <td>{item.nome}</td>
-                <td>{item.cognome}</td>
-                <td>{item.tipo}</td>
-                <td>{item.disp}</td>
-                <td>{item.marca}</td>
-                <td></td>
+      <div className="row">
+        <div className="col-md-12">
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">Data</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Cognome</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Dispositivo</th>
+                <th scope="col">Marca</th>
+                <th scope="col">modello</th>
+                <th scope="col">Seriale</th>
+                <th scope="col">Firma</th>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <button
-        className="btn btn-primary"
-        onClick={exportToCSV}
-        style={{ marginRight: 20 }}
-      >
-        EXPORT TABLE
-      </button>
-      <br></br>
-      <br></br>
-      <button
-        className="btn btn-primary"
-        onClick={cleartable}
-        style={{ marginRight: 20 }}
-      >
-        CLEART TABLE
-      </button>
+            </thead>
+            <tbody>
+              {tableData.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{item.data}</td>
+                    <td>{item.nome}</td>
+                    <td>{item.cognome}</td>
+                    <td>{item.tipo}</td>
+                    <td>{item.disp}</td>
+                    <td>{item.marca}</td>
+                    <td><button className="btn btn-danger" onClick={()=>editRow(index)}>edit</button></td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          <button
+            className="btn btn-primary"
+            onClick={exportToCSV}
+            style={{ marginRight: 20 }}
+          >
+            EXPORT TABLE
+          </button>
+          <br></br>
+          <br></br>
+          <button
+            className="btn btn-primary"
+            onClick={cleartable}
+            style={{ marginRight: 20 }}
+          >
+            CLEART TABLE
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
