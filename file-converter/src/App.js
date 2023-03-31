@@ -1,11 +1,8 @@
 import React from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import { ExportTableExcel } from "./pages/ExportTableExcel";
-import Assegnazione from "./pages/Assegnazione";
-import { Restituzione } from "./pages/Restituzione";
 import HomePage from "./pages/HomePage";
 import DragAndDrop from "./pages/DragAndDrop";
-
 
 export const App = () => {
   return (
@@ -30,16 +27,6 @@ export const App = () => {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <Link to="/assegnazione" className="list nav-link">
-                    ASSEGNAZIONE
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/restituzione" className="list nav-link">
-                    RESTITUZIONE
-                  </Link>
-                </li>
-                <li className="nav-item">
                   <Link to="/esportazione" className="list nav-link">
                     ESPORTAZIONE
                   </Link>
@@ -55,11 +42,9 @@ export const App = () => {
         </nav>
 
         <Routes>
-          <Route path="/" element={<HomePage/>}/>
-          <Route path="/assegnazione" element={<Assegnazione />} />
-          <Route path="/restituzione" element={<Restituzione />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/esportazione" element={<ExportTableExcel />} />
-          <Route path="/dragndrop" element={<DragAndDrop/>}/>
+          <Route path="/dragndrop" element={<DragAndDrop />} />
         </Routes>
       </div>
     </div>

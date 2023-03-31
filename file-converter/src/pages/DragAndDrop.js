@@ -99,7 +99,8 @@ export default function DragAndDrop() {
     console.log(id);
     setTableData(tableData.filter((item, i) => i !== id));
   };
-
+  /*
+  DragAndDropNewVersion*/
   return (
     <div className="container App">
       <br></br>
