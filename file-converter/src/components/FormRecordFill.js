@@ -9,7 +9,7 @@ const FormRecordFill = ({
   clearForm
 
 }) => {
-  const tipo_operazione = ["Restituzione", "Assegnazione"];
+  const tipo_operazione = ["R", "A"];
   const dispositivo = ["PC", "CELL"];
   const marca = [
     "SAMSUNG",

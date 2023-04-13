@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  tr th {
+    font-size: 18px;
+    padding: 12px;
+    border: 1px solid #eeeeee;
+    text-align: left;
+    background-color: rgba(217, 221, 146, 0.2);
+  }
+  
+  tr td {
+    border: 1px solid #eeeeee;
+    text-align: left;
+  }
+  
+  input {
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  input:hover {
+    background-color: #fffaf3;
+  }
+  
+  input:focus {
+    outline: 1px solid #ccc;
+    border: 1px solid #ccc;
+  }
