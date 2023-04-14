@@ -117,8 +117,8 @@ export default function DragAndDrop() {
             CLEART TABLE
           </button>
         </div>
-      </div>
-
+      </div><br></br>
+    {tableData.length>0 ? <p>ELEMENTI:{tableData.length}</p>:<p>ELEMENTI:0</p>}
       <br></br>
       <div className="row">
         <div className="col-md-12">

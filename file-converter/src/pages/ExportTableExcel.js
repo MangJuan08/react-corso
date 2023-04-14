@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import * as XLSX from "xlsx";
-import { nanoid } from "nanoid";
 import { toast, Toaster } from "react-hot-toast";
 import FormRecordFill from "../components/FormRecordFill";
 import { Table } from "../components/Table";
-import BootstrapTable from "react-bootstrap-table-next";
-import paginationFactory from "react-bootstrap-table2-paginator";
-import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import { v4 as uuid } from "uuid";
 /*import "react-bootstrap-table-next/dist/react-bootstrap-table2-paginator.min.css";
 import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
@@ -25,7 +21,7 @@ export const ExportTableExcel = () => {
     seriale: "",
     firma: "",
   });
-
+/*
   const columns = [
     {
       dataField: "id",
@@ -88,7 +84,7 @@ export const ExportTableExcel = () => {
         );
       },
     },
-  ];
+  ];*/
 
   const exportToCSV = () => {
     if (datas.length > 0) {
