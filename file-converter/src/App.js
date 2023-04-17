@@ -26,11 +26,7 @@ export const App = () => {
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
-                <li className="nav-item">
-                  <Link to="/esportazione" className="list nav-link">
-                    ESPORTAZIONE
-                  </Link>
-                </li>
+               
                 <li className="nav-item">
                   <Link to="/dragndrop" className="list nav-link">
                     DRAG AND DROP
@@ -50,3 +46,10 @@ export const App = () => {
     </div>
   );
 };
+/*
+
+ <li className="nav-item">
+                  <Link to="/esportazione" className="list nav-link">
+                    ESPORTAZIONE
+                  </Link>
+                </li>*/

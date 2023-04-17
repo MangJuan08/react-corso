@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import * as XLSX from "xlsx/xlsx";
-import './index.css'
+import "./index.css";
+import { toast } from "react-hot-toast";
 
 const fileTypes = ["PDF"];
 
@@ -9,22 +10,18 @@ export default function DragAndDrop() {
   const [tableData, setTableData] = useState([]);
   const [files, setFiles] = useState([]);
 
-
   const handleChange = (file) => {
-
-    setFiles(file)
+    setFiles(file);
     let arr = Object.keys(file).map((key) => {
       return file[key].name.replace(/_/g, " ");
     });
     let ab = Object.values(arr).map((item) => {
-      return item.replace('.pdf','');
+      return item.replace(".pdf", "");
     });
-  
-  
+
     let cd = Object.values(ab).map((item) => {
       return item.split(" ");
     });
-    
 
     let ef = cd.map((item) => {
       return {
@@ -36,21 +33,12 @@ export default function DragAndDrop() {
         marca: item[5],
         modello: item[6],
         seriale: item[7],
-        firma: item[8]
+        firma: item[8],
       };
     });
 
     setTableData(ef);
- 
-  
-   
   };
-
-
-  const viewFiles = () => {
-    console.log(files)
-  }
-
 
   const exportToCSV = () => {
     if (tableData.length > 0) {
@@ -62,6 +50,8 @@ export default function DragAndDrop() {
 
       /* generate an XLSX file */
       XLSX.writeFile(wb, "Assegnazione_Restituzione.xlsx");
+      toast.success("FILE EXPORTED SUCCESSFULLY");
+      setTableData([]);
     } else {
       alert("nessun dati da esportare");
     }
@@ -77,20 +67,20 @@ export default function DragAndDrop() {
   };
 
   const onChangeInput = (e, rowId) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
-    const editData = tableData.map((item,index) =>
+    const editData = tableData.map((item, index) =>
       index === rowId && name ? { ...item, [name]: value } : item
-    )
-    setTableData(editData)
-  }
+    );
+    setTableData(editData);
+  };
   /*
   DragAndDropNewVersion*/
   return (
     <div className="container App">
       <br></br>
       <br></br>
- 
+
       <div className="row">
         <div className="col-md-6">
           <FileUploader
@@ -101,14 +91,14 @@ export default function DragAndDrop() {
           />
         </div>
         <div className="col-md-6">
-        <button
+          <button
             className="btn btn-primary"
             onClick={exportToCSV}
             style={{ marginRight: 20 }}
           >
             EXPORT TABLE
           </button>
- 
+
           <button
             className="btn btn-primary"
             onClick={cleartable}
@@ -117,8 +107,13 @@ export default function DragAndDrop() {
             CLEART TABLE
           </button>
         </div>
-      </div><br></br>
-    {tableData.length>0 ? <p>ELEMENTI:{tableData.length}</p>:<p>ELEMENTI:0</p>}
+      </div>
+      <br></br>
+      {tableData.length > 0 ? (
+        <p>ELEMENTI:{tableData.length}</p>
+      ) : (
+        <p>ELEMENTI:0</p>
+      )}
       <br></br>
       <div className="row">
         <div className="col-md-12">
@@ -140,60 +135,78 @@ export default function DragAndDrop() {
             <tbody>
               {tableData.map((item, index) => (
                 <tr key={index}>
-                  <td><input
-                  name="data"
-                  value={item.data}
-                  type="text"
-                  onChange={(e) => onChangeInput(e, index)}
-                /></td>
-                  <td><input
-                  name="nome"
-                  value={item.nome}
-                  type="text"
-                  onChange={(e) => onChangeInput(e, index)}
-                /></td>
-                  <td><input
-                  name="cognome"
-                  value={item.cognome}
-                  type="text"
-                  onChange={(e) => onChangeInput(e, index)}
-                /></td>
-                  <td><input
-                  name="tipo"
-                  value={item.tipo}
-                  type="text"
-                  onChange={(e) => onChangeInput(e, index)}
-                /></td>
-                  <td><input
-                  name="disp"
-                  value={item.disp}
-                  type="text"
-                  onChange={(e) => onChangeInput(e, index)}
-                /></td>
-                  <td><input
-                  name="marca"
-                  value={item.marca}
-                  type="text"
-                  onChange={(e) => onChangeInput(e, index)}
-                /></td>
-                  <td><input
-                  name="modello"
-                  value={item.modello}
-                  type="text"
-                  onChange={(e) => onChangeInput(e, index)}
-                /></td>
-                  <td><input
-                  name="seriale"
-                  value={item.seriale}
-                  type="text"
-                  onChange={(e) => onChangeInput(e, index)}
-                /></td>
-                  <td><input
-                  name="firma"
-                  value={item.firma}
-                  type="text"
-                  onChange={(e) => onChangeInput(e, index)}
-                /></td>
+                  <td>
+                    <input
+                      name="data"
+                      value={item.data}
+                      type="text"
+                      onChange={(e) => onChangeInput(e, index)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      name="nome"
+                      value={item.nome}
+                      type="text"
+                      onChange={(e) => onChangeInput(e, index)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      name="cognome"
+                      value={item.cognome}
+                      type="text"
+                      onChange={(e) => onChangeInput(e, index)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      name="tipo"
+                      value={item.tipo}
+                      type="text"
+                      onChange={(e) => onChangeInput(e, index)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      name="disp"
+                      value={item.disp}
+                      type="text"
+                      onChange={(e) => onChangeInput(e, index)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      name="marca"
+                      value={item.marca}
+                      type="text"
+                      onChange={(e) => onChangeInput(e, index)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      name="modello"
+                      value={item.modello}
+                      type="text"
+                      onChange={(e) => onChangeInput(e, index)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      name="seriale"
+                      value={item.seriale}
+                      type="text"
+                      onChange={(e) => onChangeInput(e, index)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      name="firma"
+                      value={item.firma}
+                      type="text"
+                      onChange={(e) => onChangeInput(e, index)}
+                    />
+                  </td>
                   <td>
                     <button
                       className="btn btn-danger btn-sm"
@@ -201,7 +214,6 @@ export default function DragAndDrop() {
                     >
                       Delete
                     </button>
-                   
                   </td>
                 </tr>
               ))}
@@ -209,19 +221,13 @@ export default function DragAndDrop() {
           </table>
         </div>
       </div>
-      <div className="row">
-        <div className="col-md-12">
-          <button onClick={viewFiles}>view</button>
-        </div>
-      </div>
       <br></br>
-
     </div>
   );
 }
- /*-------funziona per singolo file ------*/
- 
-    /*
+/*-------funziona per singolo file ------*/
+
+/*
     <button className="btn btn-success btn-sm" onClick={(e) => createPdf(index,item.data+"_"+item.nome+"_"+item.cognome)}>create pdf</button>
   let arr = Object.keys(file).map((key) => {
      return file[key].name.replace(/_/g, " ")})
@@ -241,8 +247,8 @@ export default function DragAndDrop() {
 
   */
 
-    /*-------funziona per singolo file ------*/
-  /* 
+/*-------funziona per singolo file ------*/
+/* 
   const handleExport = () => {
     let cols = [
       "Data",
