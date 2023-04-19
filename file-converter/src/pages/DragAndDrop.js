@@ -1,10 +1,19 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import * as XLSX from "xlsx/xlsx";
 import "./index.css";
 import { toast } from "react-hot-toast";
+import DragAndDropTable from "../components/DragAndDropTable";
+import Spinner from "react-bootstrap/Spinner";
+import axios from 'axios';
 
 const fileTypes = ["PDF"];
+
+const styleMessage = {
+  textAlign:"center"
+}
+
+
 
 export default function DragAndDrop() {
   const [tableData, setTableData] = useState([]);
@@ -73,49 +82,77 @@ export default function DragAndDrop() {
       index === rowId && name ? { ...item, [name]: value } : item
     );
     setTableData(editData);
+
+  
   };
-  /*
-  DragAndDropNewVersion*/
+
+  const getData = () => {
+    axios.get('https://jsonplaceholder.typicode.com/users')
+    .then(response => console.log(response))
+  }
+  
+
+ 
   return (
     <div className="container App">
       <br></br>
       <br></br>
 
       <div className="row">
-        <div className="col-md-6">
-          <FileUploader
-            multiple={true}
-            handleChange={handleChange}
-            name="file"
-            types={fileTypes}
-          />
-        </div>
-        <div className="col-md-6">
-          <button
-            className="btn btn-primary"
-            onClick={exportToCSV}
-            style={{ marginRight: 20 }}
-          >
-            EXPORT TABLE
-          </button>
-
-          <button
-            className="btn btn-primary"
-            onClick={cleartable}
-            style={{ marginRight: 20 }}
-          >
-            CLEART TABLE
-          </button>
-        </div>
+        {tableData.length > 0 ? (
+          ""
+        ) : (
+          <div className="col-md-6">
+            <FileUploader
+              multiple={true}
+              handleChange={handleChange}
+              name="file"
+              types={fileTypes}
+            />
+          </div>
+        )}
+        {tableData.length > 0 ? (
+          <div className="col-md-6">
+            <button
+              className="btn btn-primary"
+              onClick={exportToCSV}
+              style={{ marginRight: 20 }}
+            >
+              EXPORT TABLE
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={cleartable}
+              style={{ marginRight: 20 }}
+            >
+              CLEART TABLE
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       <br></br>
-      {tableData.length > 0 ? (
-        <p>ELEMENTI:{tableData.length}</p>
-      ) : (
-        <p>ELEMENTI:0</p>
-      )}
+
       <br></br>
-      <div className="row">
+      {tableData.length > 0 ? (
+        <DragAndDropTable
+          deleteRow={deleteRow}
+          onChangeInput={onChangeInput}
+          tableData={tableData}
+        />
+      ) : (
+        <p style={styleMessage}>Nessun Dati Pronti Da Esportare</p>
+      )}
+      <button onClick={getData}>get data</button>
+    </div>
+  );
+}
+/*-------funziona per singolo file ------*/
+
+/*
+<Spinner animation="border" variant="primary"></Spinner>
+ <div className="row">
         <div className="col-md-12">
           <table className="table table-striped table-bordered">
             <thead className="thead-dark">
@@ -221,13 +258,7 @@ export default function DragAndDrop() {
           </table>
         </div>
       </div>
-      <br></br>
-    </div>
-  );
-}
-/*-------funziona per singolo file ------*/
 
-/*
     <button className="btn btn-success btn-sm" onClick={(e) => createPdf(index,item.data+"_"+item.nome+"_"+item.cognome)}>create pdf</button>
   let arr = Object.keys(file).map((key) => {
      return file[key].name.replace(/_/g, " ")})
