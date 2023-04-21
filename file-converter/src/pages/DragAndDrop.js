@@ -85,11 +85,12 @@ export default function DragAndDrop() {
 
   
   };
-
+/*
+funzione serve per testare e vedere i dati
   const getData = () => {
     axios.get('https://jsonplaceholder.typicode.com/users')
     .then(response => console.log(response))
-  }
+  }*/
   
 
  
@@ -144,7 +145,7 @@ export default function DragAndDrop() {
       ) : (
         <p style={styleMessage}>Nessun Dati Pronti Da Esportare</p>
       )}
-      <button onClick={getData}>get data</button>
+      
     </div>
   );
 }
