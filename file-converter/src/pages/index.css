@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
 
 table {
     border-collapse: collapse;
@@ -33,4 +33,17 @@ table {
   input:focus {
     outline: 1px solid #ccc;
     border: 1px solid #ccc;
+  }*/
+
+  tr th {
+    font-size: 18px;
+    padding: 12px;
+    border: 1px solid #eeeeee;
+    text-align: left;
+    background-color: rgba(217, 221, 146, 0.2);
+  }
+  
+  tr td {
+    border: 1px solid #eeeeee;
+    text-align: left;
   }

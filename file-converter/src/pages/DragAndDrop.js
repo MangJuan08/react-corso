@@ -6,12 +6,23 @@ import { toast } from "react-hot-toast";
 import MaterialReactTable from "material-react-table";
 import {
   Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   IconButton,
   Tooltip,
 } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 
 const fileTypes = ["PDF"];
+const style1 = {
+  textAlign: "left",
+};
+const style2 = {
+  textAlign: "right",
+};
 
 const styleMessage = {
   textAlign: "center",
@@ -20,6 +31,7 @@ const styleMessage = {
 export default function DragAndDrop() {
   const [tableData, setTableData] = useState([]);
   const [files, setFiles] = useState([]);
+  const [loading, isLoading] = useState(true);
 
   const columns = useMemo(
     () => [
@@ -58,12 +70,12 @@ export default function DragAndDrop() {
     let ef = cd.map((item) => {
       return {
         data: item[0],
-        nome: item[1],
-        cognome: item[2],
-        tipo: item[3],
-        disp: item[4],
-        marca: item[5].toUpperCase(),
-        modello: item[6].toUpperCase(),
+        nome: item[1].toUpperCase(),
+        cognome: item[2].toUpperCase(),
+        tipo: item[3].toUpperCase(),
+        disp: item[4].toUpperCase(),
+        marca: item[5],
+        modello: item[6],
         seriale: item[7],
         firma: item[8],
       };
@@ -92,21 +104,7 @@ export default function DragAndDrop() {
   const cleartable = () => {
     setTableData([]);
   };
-/*
-  const deleteRow = (id, e) => {
-    console.log(id);
-    setTableData(tableData.filter((item, i) => i !== id));
-  };
-
-  const onChangeInput = (e, rowId) => {
-    const { name, value } = e.target;
-
-    const editData = tableData.map((item, index) =>
-      index === rowId && name ? { ...item, [name]: value } : item
-    );
-    setTableData(editData);
-  };*/
-
+ 
   const handleDeleteRow = useCallback(
     (row) => {
       if (
@@ -128,7 +126,7 @@ export default function DragAndDrop() {
   return (
     <div className="container App">
       <br></br>
- 
+
       <div className="row">
         {tableData.length > 0 ? (
           ""
@@ -164,8 +162,30 @@ export default function DragAndDrop() {
         )}
       </div>
       <br></br>
+      <div className="row">
+        <div className="col-md-6" style={style1}></div>
+        <div className="col-md-6" style={style2}>
+          {tableData.length > 0 ? (
+            <p>
+              ELEMENTI TOTALI: <b>{tableData.length}</b>
+            </p>
+          ) : (
+            <p>
+              ELEMENTI TOTALI: <b>{tableData.length}</b>
+            </p>
+          )}
+        </div>
+      </div>
       {tableData.length > 0 ? (
         <MaterialReactTable
+          displayColumnDefOptions={{
+            "mrt-row-actions": {
+              muiTableHeadCellProps: {
+                align: "center",
+              },
+              size: 120,
+            },
+          }}
           columns={columns}
           data={tableData}
           editingMode="modal" //default
@@ -178,7 +198,7 @@ export default function DragAndDrop() {
                   <Edit />
                 </IconButton>
               </Tooltip>
-              <Tooltip arrow placement="right" title="Delete">
+              <Tooltip arrow placement="left" title="Delete">
                 <IconButton color="error" onClick={() => handleDeleteRow(row)}>
                   <Delete />
                 </IconButton>
@@ -194,14 +214,14 @@ export default function DragAndDrop() {
             ],
           }}
           enableColumnResizing
-          enableColumnOrdering 
+          enableColumnOrdering
           columnResizeMode="onChange"
-          
         />
       ) : (
-        <p style={styleMessage}>Nessun Dati Pronti Da Esportare</p>
+        <p stlye={styleMessage}>nessun dati da esportare</p>
       )}
-      <br></br><br></br><br></br><br></br>
+      <br></br>
+      <br></br>
     </div>
   );
 }
