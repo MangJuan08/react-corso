@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 
-const fileTypes = ["PDF","docx"];
+const fileTypes = ["PDF"];
 const style1 = {
   textAlign: "left",
 };
@@ -170,9 +170,7 @@ export default function DragAndDrop() {
               ELEMENTI TOTALI: <b>{tableData.length}</b>
             </p>
           ) : (
-            <p>
-              ELEMENTI TOTALI: <b>{tableData.length}</b>
-            </p>
+          ""
           )}
         </div>
       </div>
@@ -218,7 +216,7 @@ export default function DragAndDrop() {
           columnResizeMode="onChange"
         />
       ) : (
-        <p stlye={styleMessage}>nessun dati da esportare</p>
+        <p style={styleMessage}>nessun dati da esportare</p>
       )}
       <br></br>
       <br></br>
