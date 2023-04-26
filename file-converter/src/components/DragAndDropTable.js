@@ -1,23 +1,29 @@
 import React from "react";
 
-const style1= {
-    textAlign:"left"
-}
+const style1 = {
+  textAlign: "left",
+};
 const style2 = {
-    textAlign:"right"
-}
+  textAlign: "right",
+};
 const DragAndDropTable = ({ tableData, deleteRow, onChangeInput }) => {
   return (
     <div>
-        <div className="row">
-            <div className="col-md-6" style={style1}>
-            <p>TABLE COMPONENT DRAG AND DROP</p>
-            </div>
-            <div className="col-md-6" style={style2}>
-            {tableData.length>0 ? <p>ELEMENTI TOTALI: <b>{tableData.length}</b></p> : <p>ELEMENTI TOTALI: <b>{tableData.length}</b></p>}
-            </div>
+      <div className="row">
+        <div className="col-md-6" style={style1}></div>
+        <div className="col-md-6" style={style2}>
+          {tableData.length > 0 ? (
+            <p>
+              ELEMENTI TOTALI: <b>{tableData.length}</b>
+            </p>
+          ) : (
+            <p>
+              ELEMENTI TOTALI: <b>{tableData.length}</b>
+            </p>
+          )}
         </div>
- 
+      </div>
+
       <table className="table table-striped table-bordered">
         <thead className="thead-dark">
           <tr>
