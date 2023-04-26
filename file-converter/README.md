@@ -30,7 +30,7 @@ firma (Si -> se è firmato dalla persona altrimenti NO)
 
 esempio: 20210514_A_B_A_CELL_Huawei_PSmart2018_863161044812289_SI
 
-###COSA FA QUEST'APPLICAZIONE?
+### COSA FA QUEST'APPLICAZIONE?
 
 1. I file pdf vengono trascinati nel box
 2. Viene creata una tabella con i nome dei files
