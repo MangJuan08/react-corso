@@ -19,14 +19,14 @@ You may also see any lint errors in the console.
 I files esempi si trovano nella cartella "files_da_trascinare"
 Ogni nome del file segue il formatto:
 
-data - anno mese e giorno (tutto attaccato)
-nome
-cognome
-tipo_di_operazione(A per Assegnazione ed R per Restituzione)
-marca
-modello
-seriale
-firma (Si -> se è firmato dalla persona altrimenti NO)
+1. data - anno mese e giorno (tutto attaccato)
+2. nome
+3. cognome
+4. tipo_di_operazione(A per Assegnazione ed R per Restituzione)
+5. marca
+6. modello
+7. seriale
+8. firma (Si -> se è firmato dalla persona altrimenti NO)
 
 esempio: 20210514_A_B_A_CELL_Huawei_PSmart2018_863161044812289_SI
 
