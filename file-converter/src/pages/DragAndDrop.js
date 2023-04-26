@@ -5,7 +5,7 @@ import "./index.css";
 import { toast } from "react-hot-toast";
 import DragAndDropTable from "../components/DragAndDropTable";
 import Spinner from "react-bootstrap/Spinner";
-import axios from 'axios';
+
 
 const fileTypes = ["PDF"];
 
