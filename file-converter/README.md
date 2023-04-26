@@ -23,11 +23,13 @@ Ogni nome del file segue il formatto:
 2. nome
 3. cognome
 4. tipo_di_operazione(A per Assegnazione ed R per Restituzione)
-5. marca
-6. modello
-7. seriale
-8. firma (Si -> se è firmato dalla persona altrimenti NO)
+5. dispositvo (CELL O PC)
+6. marca
+7. modello
+8. seriale
+9. firma (Si -> se è firmato dalla persona altrimenti NO)
 
+formato: data_nome_cognome_tipo_dispositivo_marca_modello_Seriale_firma
 esempio: 20210514_A_B_A_CELL_Huawei_PSmart2018_863161044812289_SI
 
 ## COSA FA QUEST'APPLICAZIONE?
