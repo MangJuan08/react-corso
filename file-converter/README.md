@@ -16,7 +16,7 @@ You may also see any lint errors in the console.
 
 ## APPLICAZIONE PER PRENDERE I NOMI DEI FILES DI TIPO PDF
 
-I files esempi si trovano nella cartella "files_da_trascinare"
+I files esempi si trovano nella cartella "files_da_trascinare" che sta dentro della cartella "src"
 Ogni nome del file segue il formatto:
 
 1. data - anno mese e giorno (tutto attaccato)
