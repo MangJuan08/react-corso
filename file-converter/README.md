@@ -30,6 +30,7 @@ Ogni nome del file segue il formatto:
 9. firma (Si -> se è firmato dalla persona altrimenti NO)
 
 formato: data_nome_cognome_tipo_dispositivo_marca_modello_Seriale_firma
+
 esempio: 20210514_A_B_A_CELL_Huawei_PSmart2018_863161044812289_SI
 
 ## COSA FA QUEST'APPLICAZIONE?
