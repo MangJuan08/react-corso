@@ -6,6 +6,20 @@ const style1 = {
 const style2 = {
   textAlign: "right",
 };
+
+const tableColumns = [
+  { label: "Data", key: 1 },
+  { label: "Nome", key: 2 },
+  { label: "Cognome", key: 3 },
+  { label: "Tipo", key: 4 },
+  { label: "Dispositivo", key: 5 },
+  { label: "Marca", key: 6 },
+  { label: "Modello", key: 7 },
+  { label: "Seriale", key: 8 },
+  { label: "Firma", key: 9 },
+  { label: "Operazione", key: 10 },
+];
+
 const DragAndDropTable = ({ tableData, deleteRow, onChangeInput }) => {
   return (
     <div>
@@ -27,16 +41,9 @@ const DragAndDropTable = ({ tableData, deleteRow, onChangeInput }) => {
       <table className="table table-striped table-bordered">
         <thead className="thead-dark">
           <tr>
-            <th scope="col">Data</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Cognome</th>
-            <th scope="col">Tipo</th>
-            <th scope="col">Dispositivo</th>
-            <th scope="col">Marca</th>
-            <th scope="col">Modello</th>
-            <th scope="col">Seriale</th>
-            <th scope="col">Firma</th>
-            <th scope="col">Operazione</th>
+            {tableColumns.map(({ label, key }) => {
+              return <th key={key}>{label}</th>;
+            })}
           </tr>
         </thead>
         <tbody>
