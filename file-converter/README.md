@@ -14,7 +14,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### Applicazione per Prendere I nomi dei File PDF
+### APPLICAZIONE PER PRENDERE I NOMI DEI FILES DI TIPO PDF
 
 I files esempi si trovano nella cartella "files_da_trascinare"
 Ogni nome del file segue il formatto:
