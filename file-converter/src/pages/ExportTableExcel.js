@@ -21,70 +21,7 @@ export const ExportTableExcel = () => {
     seriale: "",
     firma: "",
   });
-/*
-  const columns = [
-    {
-      dataField: "id",
-      text: "ID",
-    },
-    {
-      dataField: "data_",
-      text: "Data",
-    },
-    {
-      dataField: "nome",
-      text: "Nome",
-      sort: true,
-      filter: textFilter(),
-    },
-    {
-      dataField: "cognome",
-      text: "Cognome",
-      sort: true,
-      filter: textFilter(),
-    },
-    {
-      dataField: "tipo",
-      text: "Tipo",
-    },
-    {
-      dataField: "disp",
-      text: "Dispositivo",
-    },
-    {
-      dataField: "marca",
-      text: "Marca",
-    },
-    {
-      dataField: "modello",
-      text: "Modello",
-    },
-    {
-      dataField: "seriale",
-      text: "Seriale",
-    },
-    {
-      dataField: "firma",
-      text: "Firma",
-    },
-    {
-      dataField: "remove",
-      text: "delete",
-      formatter: (cellContent, row) => {
-        return (
-          <button
-            className="btn btn-danger btn-xs"
-            onClick={() => {
-              console.log(row);
-              deleteRow(row.id);
-            }}
-          >
-            Delete
-          </button>
-        );
-      },
-    },
-  ];*/
+
 
   const exportToCSV = () => {
     if (datas.length > 0) {
@@ -267,17 +204,71 @@ export const ExportTableExcel = () => {
               alwaysShowAllBtns: true,
             })}
           ></BootstrapTable>
-     
 
 
-
- <!--
-       !-->
-
- 
-
-
-
+  const columns = [
+    {
+      dataField: "id",
+      text: "ID",
+    },
+    {
+      dataField: "data_",
+      text: "Data",
+    },
+    {
+      dataField: "nome",
+      text: "Nome",
+      sort: true,
+      filter: textFilter(),
+    },
+    {
+      dataField: "cognome",
+      text: "Cognome",
+      sort: true,
+      filter: textFilter(),
+    },
+    {
+      dataField: "tipo",
+      text: "Tipo",
+    },
+    {
+      dataField: "disp",
+      text: "Dispositivo",
+    },
+    {
+      dataField: "marca",
+      text: "Marca",
+    },
+    {
+      dataField: "modello",
+      text: "Modello",
+    },
+    {
+      dataField: "seriale",
+      text: "Seriale",
+    },
+    {
+      dataField: "firma",
+      text: "Firma",
+    },
+    {
+      dataField: "remove",
+      text: "delete",
+      formatter: (cellContent, row) => {
+        return (
+          <button
+            className="btn btn-danger btn-xs"
+            onClick={() => {
+              console.log(row);
+              deleteRow(row.id);
+            }}
+          >
+            Delete
+          </button>
+        );
+      },
+    },
+  ];
 
 
         

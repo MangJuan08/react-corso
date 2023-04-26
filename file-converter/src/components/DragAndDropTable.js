@@ -1,4 +1,19 @@
-import React from "react";
+import React, { useMemo } from "react";
+import MaterialReactTable from "material-react-table";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  MenuItem,
+  Stack,
+  TextField,
+  Tooltip,
+} from "@mui/material";
+import { Delete, Edit } from "@mui/icons-material";
 
 const style1 = {
   textAlign: "left",
@@ -21,6 +36,23 @@ const tableColumns = [
 ];
 
 const DragAndDropTable = ({ tableData, deleteRow, onChangeInput }) => {
+
+
+  const columns = useMemo(
+    () => [
+      { accessorKey: "data", header: "Data" },
+      { accessorKey: "nome", header: "Nome" },
+      { accessorKey: "cognome", header: "Cognome" },
+      { accessorKey: "disp", header: "Dispositivo" },
+      { accessorKey: "tipo", header: "Tipo" },
+      { accessorKey: "marca", header: "Marca" },
+      { accessorKey: "modello", header: "Modello" },
+      { accessorKey: "seriale", header: "Seriale" },
+      { accessorKey: "firma", header: "Firma" },
+    ],
+    []
+  );
+
   return (
     <div>
       <div className="row">
@@ -38,6 +70,16 @@ const DragAndDropTable = ({ tableData, deleteRow, onChangeInput }) => {
         </div>
       </div>
 
+
+      <br></br>
+      <br></br>
+    </div>
+  );
+};
+
+export default DragAndDropTable;
+
+/*
       <table className="table table-striped table-bordered">
         <thead className="thead-dark">
           <tr>
@@ -132,9 +174,4 @@ const DragAndDropTable = ({ tableData, deleteRow, onChangeInput }) => {
             </tr>
           ))}
         </tbody>
-      </table>
-    </div>
-  );
-};
-
-export default DragAndDropTable;
+      </table>*/

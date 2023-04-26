@@ -1,24 +1,47 @@
-import {  useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import * as XLSX from "xlsx/xlsx";
 import "./index.css";
 import { toast } from "react-hot-toast";
-import DragAndDropTable from "../components/DragAndDropTable";
-import Spinner from "react-bootstrap/Spinner";
-
+import MaterialReactTable from "material-react-table";
+import {
+  Box,
+  IconButton,
+  Tooltip,
+} from "@mui/material";
+import { Delete, Edit } from "@mui/icons-material";
 
 const fileTypes = ["PDF"];
 
 const styleMessage = {
-  textAlign:"center"
-}
-
-
+  textAlign: "center",
+};
 
 export default function DragAndDrop() {
   const [tableData, setTableData] = useState([]);
   const [files, setFiles] = useState([]);
 
+  const columns = useMemo(
+    () => [
+      { accessorKey: "data", header: "Data" },
+      { accessorKey: "nome", header: "Nome" },
+      { accessorKey: "cognome", header: "Cognome" },
+      { accessorKey: "disp", header: "Dispositivo" },
+      { accessorKey: "tipo", header: "Tipo" },
+      { accessorKey: "marca", header: "Marca" },
+      { accessorKey: "modello", header: "Modello" },
+      { accessorKey: "seriale", header: "Seriale" },
+      { accessorKey: "firma", header: "Firma" },
+    ],
+    []
+  );
+  const handleSaveRow = async ({ exitEditingMode, row, values }) => {
+    //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
+    tableData[row.index] = values;
+    //send/receive api updates here
+    setTableData([...tableData]);
+    exitEditingMode(); //required to exit editing mode
+  };
   const handleChange = (file) => {
     setFiles(file);
     let arr = Object.keys(file).map((key) => {
@@ -39,8 +62,8 @@ export default function DragAndDrop() {
         cognome: item[2],
         tipo: item[3],
         disp: item[4],
-        marca: item[5],
-        modello: item[6],
+        marca: item[5].toUpperCase(),
+        modello: item[6].toUpperCase(),
         seriale: item[7],
         firma: item[8],
       };
@@ -69,7 +92,7 @@ export default function DragAndDrop() {
   const cleartable = () => {
     setTableData([]);
   };
-
+/*
   const deleteRow = (id, e) => {
     console.log(id);
     setTableData(tableData.filter((item, i) => i !== id));
@@ -82,23 +105,30 @@ export default function DragAndDrop() {
       index === rowId && name ? { ...item, [name]: value } : item
     );
     setTableData(editData);
+  };*/
 
-  
-  };
-/*
-funzione serve per testare e vedere i dati
-  const getData = () => {
-    axios.get('https://jsonplaceholder.typicode.com/users')
-    .then(response => console.log(response))
-  }*/
-  
+  const handleDeleteRow = useCallback(
+    (row) => {
+      if (
+        alert(
+          `Are you sure you want to delete ${row.getValue(
+            "nome"
+          )} ${row.getValue("cognome")}`
+        )
+      ) {
+        return;
+      }
+      //send api delete request here, then refetch or update local table data for re-render
+      tableData.splice(row.index, 1);
+      setTableData([...tableData]);
+    },
+    [tableData]
+  );
 
- 
   return (
     <div className="container App">
       <br></br>
-      <br></br>
-
+ 
       <div className="row">
         {tableData.length > 0 ? (
           ""
@@ -134,171 +164,44 @@ funzione serve per testare e vedere i dati
         )}
       </div>
       <br></br>
-
-      <br></br>
       {tableData.length > 0 ? (
-        <DragAndDropTable
-          deleteRow={deleteRow}
-          onChangeInput={onChangeInput}
-          tableData={tableData}
+        <MaterialReactTable
+          columns={columns}
+          data={tableData}
+          editingMode="modal" //default
+          enableEditing
+          onEditingRowSave={handleSaveRow}
+          renderRowActions={({ row, table }) => (
+            <Box sx={{ display: "flex", gap: "1rem" }}>
+              <Tooltip arrow placement="left" title="Edit">
+                <IconButton onClick={() => table.setEditingRow(row)}>
+                  <Edit />
+                </IconButton>
+              </Tooltip>
+              <Tooltip arrow placement="right" title="Delete">
+                <IconButton color="error" onClick={() => handleDeleteRow(row)}>
+                  <Delete />
+                </IconButton>
+              </Tooltip>
+            </Box>
+          )}
+          initialState={{
+            sorting: [
+              {
+                id: "nome", //sort by age by default on page load
+                asc: true,
+              },
+            ],
+          }}
+          enableColumnResizing
+          enableColumnOrdering 
+          columnResizeMode="onChange"
+          
         />
       ) : (
         <p style={styleMessage}>Nessun Dati Pronti Da Esportare</p>
       )}
-      
+      <br></br><br></br><br></br><br></br>
     </div>
   );
 }
-/*-------funziona per singolo file ------*/
-
-/*
-<Spinner animation="border" variant="primary"></Spinner>
- <div className="row">
-        <div className="col-md-12">
-          <table className="table table-striped table-bordered">
-            <thead className="thead-dark">
-              <tr>
-                <th scope="col">Data</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Cognome</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Dispositivo</th>
-                <th scope="col">Marca</th>
-                <th scope="col">Modello</th>
-                <th scope="col">Seriale</th>
-                <th scope="col">Firma</th>
-                <th scope="col">Operazione</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.map((item, index) => (
-                <tr key={index}>
-                  <td>
-                    <input
-                      name="data"
-                      value={item.data}
-                      type="text"
-                      onChange={(e) => onChangeInput(e, index)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      name="nome"
-                      value={item.nome}
-                      type="text"
-                      onChange={(e) => onChangeInput(e, index)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      name="cognome"
-                      value={item.cognome}
-                      type="text"
-                      onChange={(e) => onChangeInput(e, index)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      name="tipo"
-                      value={item.tipo}
-                      type="text"
-                      onChange={(e) => onChangeInput(e, index)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      name="disp"
-                      value={item.disp}
-                      type="text"
-                      onChange={(e) => onChangeInput(e, index)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      name="marca"
-                      value={item.marca}
-                      type="text"
-                      onChange={(e) => onChangeInput(e, index)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      name="modello"
-                      value={item.modello}
-                      type="text"
-                      onChange={(e) => onChangeInput(e, index)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      name="seriale"
-                      value={item.seriale}
-                      type="text"
-                      onChange={(e) => onChangeInput(e, index)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      name="firma"
-                      value={item.firma}
-                      type="text"
-                      onChange={(e) => onChangeInput(e, index)}
-                    />
-                  </td>
-                  <td>
-                    <button
-                      className="btn btn-danger btn-sm"
-                      onClick={(e) => deleteRow(index, e)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-    <button className="btn btn-success btn-sm" onClick={(e) => createPdf(index,item.data+"_"+item.nome+"_"+item.cognome)}>create pdf</button>
-  let arr = Object.keys(file).map((key) => {
-     return file[key].name.replace(/_/g, " ")})
- let prov = arr.toString().split(" ");
-
-
-  console.log(prov)
-  newData = {
-    data:prov[0],
-    nome:prov[1],
-    cognome:prov[2],
-    tipo:prov[3],
-    disp:prov[4],
-    marca:prov[5]
-  }
-  setTableData((tableData) => [...tableData,newData])
-
-  */
-
-/*-------funziona per singolo file ------*/
-/* 
-  const handleExport = () => {
-    let cols = [
-      "Data",
-      "Nome",
-      "Cognome",
-      "Seriale",
-      "Modello",
-      "Marca",
-      "Tipo",
-      "Firma",
-    ];
-    let ws = XLSX.utils.json_to_sheet(sheetData);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, ws);
-
-    /* fix headers 
-    XLSX.utils.sheet_add_aoa(ws, [cols], { origin: "A1" });
-
-    /* create an XLSX file and try to save to Presidents.xlsx 
-    XLSX.writeFile(workbook, "Presidents.xlsx", { compression: true });
-  };*/
