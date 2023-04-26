@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 
-const fileTypes = ["PDF"];
+const fileTypes = ["PDF","docx"];
 const style1 = {
   textAlign: "left",
 };
