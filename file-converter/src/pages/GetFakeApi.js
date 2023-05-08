@@ -25,6 +25,12 @@ const GetFakeApi = () => {
   };
 
   useEffect(() => {
+ loadTableMat();
+  }, []);
+
+
+  const loadTableMat = () => {
+    isLoading(true);
     setTimeout(() => {
         axios
         .get("https://jsonplaceholder.typicode.com/posts")
@@ -34,10 +40,14 @@ const GetFakeApi = () => {
         isLoading(false)
 }, 3000);
 
-  }, []);
+
+  }
 
   return (
     <div className="container">
+      <br></br>
+      <br></br>
+      <button className="btn btn-primary" onClick={loadTableMat}>reset table</button>
       <br></br>
       <br></br>
       <MaterialReactTable

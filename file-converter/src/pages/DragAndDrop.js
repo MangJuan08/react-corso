@@ -182,6 +182,7 @@ export default function DragAndDrop() {
           data={tableData}
           editingMode="modal" //default
           enableEditing
+          enableStickyHeader
           onEditingRowSave={handleSaveRow}
           renderRowActions={({ row, table }) => (
             <Box sx={{ display: "flex", gap: "1rem" }}>
