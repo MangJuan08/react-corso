@@ -5,10 +5,7 @@ import setAuthToken from "../components/setAuthToken";
 import { useNavigate  } from "react-router-dom";
 import NavBar from "../components/NavBar";
 
-const userLogin = {
-  username: "Kamren",
-  password: "demarco.info",
-};
+
 const HomePage = () => {
    const navigate = useNavigate();
   const [res, setResponse] = useState([]);
