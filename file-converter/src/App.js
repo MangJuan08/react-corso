@@ -9,6 +9,9 @@ import GetFakeApi from "./pages/GetFakeApi";
 
 export const App = () => {
 
+    const [isLoggedIn, setisLoggedIn] = useState(null);
+    
+
   return (
     <div>
       <Routes>
