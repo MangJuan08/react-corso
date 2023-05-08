@@ -5,6 +5,7 @@ import DragAndDrop from "./pages/DragAndDrop";
 
 import HomePage from "./pages/HomePage";
 import GetFakeApi from "./pages/GetFakeApi";
+import Protected from "./components/Protected";
 
 const userLogin = {
   username: "Kamren",
