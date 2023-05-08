@@ -5,11 +5,12 @@ import "./index.css";
 import { toast } from "react-hot-toast";
 import MaterialReactTable from "material-react-table";
 import { Box, IconButton, Tooltip } from "@mui/material";
+import { useNavigate  } from "react-router-dom";
 import {
   Delete,
-  Edit,
-  SignalWifiStatusbarNullSharp,
+  Edit
 } from "@mui/icons-material";
+import NavBar from "../components/NavBar";
 
 const fileTypes = ["PDF"];
 const style1 = {
@@ -116,8 +117,13 @@ export default function DragAndDrop() {
     },
     [tableData]
   );
-
+  const token = localStorage.getItem("token");
+   const navigate = useNavigate();
+  if(token)
+  {
   return (
+    <div>
+      <NavBar/>
     <div className="container App">
       <br></br>
 
@@ -216,5 +222,9 @@ export default function DragAndDrop() {
       <br></br>
       <br></br>
     </div>
-  );
+    </div>
+  )
+      } else {
+        navigate("/")
+      }
 }
