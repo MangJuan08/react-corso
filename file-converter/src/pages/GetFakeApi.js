@@ -28,6 +28,9 @@ const GetFakeApi = () => {
 
   useEffect(() => {
  loadTableMat();
+
+ const datas = localStorage.getItem("userData");
+ console.log(JSON.stringify(datas))
   }, []);
 
 

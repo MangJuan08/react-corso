@@ -26,6 +26,7 @@ const HomePage = () => {
     if(arr) {
       const token = "token";
       localStorage.setItem("token",token);
+      localStorage.setItem("userData",JSON.stringify(arr))
       setAuthToken(token);
       navigate("/fakeApi")
     }
