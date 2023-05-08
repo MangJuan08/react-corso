@@ -4,12 +4,12 @@ import * as XLSX from "xlsx/xlsx";
 import "./index.css";
 import { toast } from "react-hot-toast";
 import MaterialReactTable from "material-react-table";
+import { Box, IconButton, Tooltip } from "@mui/material";
 import {
-  Box,
-  IconButton,
-  Tooltip,
-} from "@mui/material";
-import { Delete, Edit } from "@mui/icons-material";
+  Delete,
+  Edit,
+  SignalWifiStatusbarNullSharp,
+} from "@mui/icons-material";
 
 const fileTypes = ["PDF"];
 const style1 = {
@@ -26,19 +26,18 @@ const styleMessage = {
 export default function DragAndDrop() {
   const [tableData, setTableData] = useState([]);
   const [files, setFiles] = useState([]);
-  const [loading, isLoading] = useState(true);
 
   const columns = useMemo(
     () => [
-      { accessorKey: "data", header: "Data" },
-      { accessorKey: "nome", header: "Nome" },
-      { accessorKey: "cognome", header: "Cognome" },
-      { accessorKey: "disp", header: "Dispositivo" },
-      { accessorKey: "tipo", header: "Tipo" },
-      { accessorKey: "marca", header: "Marca" },
-      { accessorKey: "modello", header: "Modello" },
-      { accessorKey: "seriale", header: "Seriale" },
-      { accessorKey: "firma", header: "Firma" },
+      { accessorKey: "data", header: "Data", enableClickToCopy: true },
+      { accessorKey: "nome", header: "Nome", enableClickToCopy: true },
+      { accessorKey: "cognome", header: "Cognome", enableClickToCopy: true },
+      { accessorKey: "disp", header: "Dispositivo", enableClickToCopy: true },
+      { accessorKey: "tipo", header: "Tipo", enableClickToCopy: true },
+      { accessorKey: "marca", header: "Marca", enableClickToCopy: true },
+      { accessorKey: "modello", header: "Modello", enableClickToCopy: true },
+      { accessorKey: "seriale", header: "Seriale", enableClickToCopy: true },
+      { accessorKey: "firma", header: "Firma", enableClickToCopy: true },
     ],
     []
   );
@@ -99,7 +98,7 @@ export default function DragAndDrop() {
   const cleartable = () => {
     setTableData([]);
   };
- 
+
   const handleDeleteRow = useCallback(
     (row) => {
       if (
@@ -165,7 +164,7 @@ export default function DragAndDrop() {
               ELEMENTI TOTALI: <b>{tableData.length}</b>
             </p>
           ) : (
-          ""
+            ""
           )}
         </div>
       </div>

@@ -4,6 +4,7 @@ import { ExportTableExcel } from "./pages/ExportTableExcel";
 import DragAndDrop from "./pages/DragAndDrop";
 import aubay from "./aubay.png";
 import HomePage from "./pages/HomePage";
+import GetFakeApi from "./pages/GetFakeApi";
 
 export const App = () => {
   return (
@@ -30,6 +31,11 @@ export const App = () => {
                 DRAG AND DROP
               </Link>
             </ul>
+            <ul className="navbar-nav">
+              <Link to="/fakeApi" className="list nav-link">
+                FAKE API
+              </Link>
+            </ul>
           </div>
         </div>
       </nav>
@@ -38,6 +44,7 @@ export const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/dragndrop" element={<DragAndDrop />} />
         <Route path="/esportazione" element={<ExportTableExcel />} />
+        <Route path="/fakeApi" element={<GetFakeApi/>}/>
       </Routes>
     </div>
   );
