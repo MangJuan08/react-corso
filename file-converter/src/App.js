@@ -6,6 +6,7 @@ import DragAndDrop from "./pages/DragAndDrop";
 import HomePage from "./pages/HomePage";
 import GetFakeApi from "./pages/GetFakeApi";
 import Protected from "./components/Protected";
+import Profile from "./pages/Profile";
 
 const userLogin = {
   username: "Kamren",
@@ -23,7 +24,7 @@ export const App = () => {
         <Route path="/dragndrop" element={<DragAndDrop />} />
         <Route path="/esportazione" element={<ExportTableExcel />} />
         <Route path="/fakeApi" element={<GetFakeApi/>}/>
-      
+        <Route path="/profile" element={<Profile/>}/>
       </Routes>
     </div>
   );

@@ -52,6 +52,9 @@ const NavBar = () => {
                   <Link to="/dragndrop" className="list nav-link">
                     DRAG AND DROP
                   </Link>
+                  <Link to="/profile" className="list nav-link">
+                    PROFILE
+                  </Link>
                   <li className="nav-item">
                     <button className="btn btn-primary" onClick={logout}>
                       LOGOUT

@@ -64,6 +64,7 @@ const GetFakeApi = () => {
             columns={columns}
             data={tableData}
             state={{isLoading:loadTable}}
+            enableStickyFooter
             editingMode="cell"
           enableEditing
           muiTableBodyCellEditTextFieldProps={({ cell }) => ({
