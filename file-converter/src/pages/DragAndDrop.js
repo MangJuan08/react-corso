@@ -49,8 +49,10 @@ export default function DragAndDrop() {
     setTableData([...tableData]);
     exitEditingMode(); //required to exit editing mode
   };
+
   const handleChange = (file) => {
     setFiles(file);
+    console.log(file)
     let arr = Object.keys(file).map((key) => {
       return file[key].name.replace(/_/g, " ");
     });
@@ -62,6 +64,8 @@ export default function DragAndDrop() {
       return item.split(" ");
     });
 
+    console.log(cd)
+    
     let ef = cd.map((item) => {
       return {
         data: item[0],
@@ -75,7 +79,6 @@ export default function DragAndDrop() {
         firma: item[8],
       };
     });
-
     setTableData(ef);
   };
 
@@ -117,6 +120,10 @@ export default function DragAndDrop() {
     },
     [tableData]
   );
+
+  const checkTable = () => {
+    console.log(tableData)
+  }
   const token = localStorage.getItem("token");
    const navigate = useNavigate();
   if(token)
@@ -124,7 +131,7 @@ export default function DragAndDrop() {
   return (
     <div>
       <NavBar/>
-    <div className="container App">
+    <div className="container-fluid">
       <br></br>
 
       <div className="row">
@@ -156,6 +163,7 @@ export default function DragAndDrop() {
             >
               CLEART TABLE
             </button>
+            <button onClick={checkTable}>check table</button>
           </div>
         ) : (
           ""

@@ -17,7 +17,7 @@ const NavBar = () => {
       {" "}
       <nav className="navbar navbar-expand-lg bg-light">
         {token ? (
-          <div className="container">
+          <div className="container-fluid">
             <Link to="/fakeApi" className="navbar-brand">
               HOME
             </Link>
@@ -56,7 +56,7 @@ const NavBar = () => {
                     PROFILE
                   </Link>
                   <li className="nav-item">
-                    <button className="btn btn-primary" onClick={logout}>
+                    <button className="btn btn-sm btn-outline-secondary" onClick={logout}>
                       LOGOUT
                     </button>
                   </li>
